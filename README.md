@@ -63,5 +63,5 @@ Mathenge Richard - [MRichardN](https://github.com/MRichardN)
 This project is licensed under [MIT](https://github.com/MRichardN/Questioner-api/blob/master/LICENSE) license.
 
 ## Acknowledgement
-Andela Workshops
-Team members
+-Andela Workshops
+-Team members
