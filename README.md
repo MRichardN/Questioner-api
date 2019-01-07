@@ -2,13 +2,11 @@
 A questioner is a platform for crowd-sourcing questions for a meetup. It helps the meetup organizer prioritize  questions to be answered. Other users can vote on asked questions and they bubble to the top  or bottom of the log.
 
 ## Prerequisites
----------
 - Python 3.7.0 
 - Postman
 
 
 ## Installation
----------
 1. Clone this repository :
 
 	```
@@ -47,7 +45,6 @@ A questioner is a platform for crowd-sourcing questions for a meetup. It helps t
     ```
 
 ## Testing API endpoint
----------
 
 | Endpoint                             | HTTP Verb   | Functionality           |
 | ------------------------------------ | ----------- | ----------------------- |    
@@ -60,14 +57,11 @@ A questioner is a platform for crowd-sourcing questions for a meetup. It helps t
 | /api/v1/add_meetups/<meetup_id>/rsvps/   | POST        | Create a question for a specific meetup   |
 
 ## Authors
----------
 Mathenge Richard - [MRichardN](https://github.com/MRichardN)
 
 ## License
----------
 This project is licensed under [MIT]https://github.com/MRichardN/Questioner-api/blob/master/LICENSE license
 
 ## Acknowledgement
----------
 Andela Workshops
 Team members
