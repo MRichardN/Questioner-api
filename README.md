@@ -60,7 +60,7 @@ A questioner is a platform for crowd-sourcing questions for a meetup. It helps t
 Mathenge Richard - [MRichardN](https://github.com/MRichardN)
 
 ## License
-This project is licensed under [MIT]https://github.com/MRichardN/Questioner-api/blob/master/LICENSE license
+This project is licensed under [MIT](https://github.com/MRichardN/Questioner-api/blob/master/LICENSE) license.
 
 ## Acknowledgement
 Andela Workshops
