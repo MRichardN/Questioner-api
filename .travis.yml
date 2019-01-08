@@ -5,8 +5,12 @@ python:
 
 install:
   - pip install -r requirements.txt
-  - pip install python-coveralls
+  - pip install coveralls
   - pip install coverage
+  - pip install codeclimate-test-reporter
+
+env:
+ - FLASK_VERSION=1.0.2   
 
 script: 
   - sudo pytest --cov=app
@@ -15,5 +19,6 @@ script:
 after_success:
   - coveralls
   - coverage xml
+  - codeclimate-test-reporter
 
   
