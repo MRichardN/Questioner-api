@@ -1,7 +1,7 @@
 import datetime
 from flask import Blueprint, request, jsonify, abort, make_response 
 from app.api.v1.models.questions_model import Question
-from app.api.v1.models.meetup_model import Meetup
+from app.api.v1.models.meetups_model import Meetup
 from app.api.v1.models.rsvp_model import Rsvp
 from app.api.v1.models import question_list, user_list, meetup_list, rsvp_list
 
@@ -53,3 +53,50 @@ def post_meetups():
     }
     meetup.add_meetup(post_mtup)
     return jsonify({ 'status': 201, 'data': post_mtup, }), 201 
+
+@version1.route('/question/<int:question_id>/downvote/', methods=["PATCH"])
+def downvote_question(question_id):
+    """
+    downvote a question.
+    """
+    if not request.json:
+          abort(400)
+    if 'title' in request.json and type(request.json['title']) != str:
+         abort(400)
+    if 'body' in request.json and type(request.json['body']) is not str:
+        abort(400)
+    this_question = [this_question for this_question in question_list if this_question["id"]==question_id]
+    if this_question:
+        title = request.json.get('title', this_question[0]["title"])
+        body = request.json.get('body', this_question[0]['body'])
+        createdOn = datetime.datetime.now()
+        createdBy = request.json.get('createdBy', this_question[0]['createdBy'])
+        meetup = request.json.get('meetup', this_question[0]['meetup'])
+        votes = request.json.get('votes', this_question[0]['votes']) -1
+        updated_question = question.update_question(question_id, title, body, createdOn, createdBy, meetup, votes)
+        return jsonify({ 'status':201, 'data': updated_question}), 201
+    abort(404)
+
+@version1.route('/question/<int:question_id>/upvote/', methods=["PATCH"])
+def upvote_question(question_id):
+    """
+    upvote a question.
+    """
+    if not request.json:
+          abort(400)
+    if 'title' in request.json and type(request.json['title']) != str:
+         abort(400)
+    if 'body' in request.json and type(request.json['body']) is not str:
+        abort(400)
+    this_question = [this_question for this_question in question_list if this_question["id"]==question_id]
+    if this_question:
+        title = request.json.get('title', this_question[0]["title"])
+        body = request.json.get('body', this_question[0]['body'])
+        createdOn = datetime.datetime.now()
+        createdBy = request.json.get('createdBy', this_question[0]['createdBy'])
+        meetup = request.json.get('meetup', this_question[0]['meetup'])
+        votes = request.json.get('votes', this_question[0]['votes'] ) +1
+        updated_question = question.update_question(question_id, title, body, createdOn, createdBy, meetup, votes)
+        return jsonify({ 'status':201, 'data': updated_question}), 201
+    abort(404)  
+   
