@@ -36,3 +36,20 @@ def get_all_meetups():
     if meetup:
         return jsonify({'status':200, 'data': meetup.show_meetups()}), 200
     abort(404)
+
+@version1.route('/post_meetup/', methods=["POST"])
+def post_meetups():
+    """
+    Post a meetup.
+    """
+    if not request.json or not 'topic' in request.json:
+        abort(400)
+    post_mtup = {
+    'id': question_list[-1]['id'] + 1,
+    'createdOn': request.json['createdOn'],
+    "location" : request.json['location'],
+    "topic" : request.json['topic'],
+    "happeningOn" : request.json['happeningOn']
+    }
+    meetup.add_meetup(post_mtup)
+    return jsonify({ 'status': 201, 'data': post_mtup, }), 201 
