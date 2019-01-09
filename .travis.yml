@@ -13,7 +13,7 @@ env:
  - FLASK_VERSION=1.0.2   
 
 script: 
-  - sudo pytest --cov=app
+  - pytest --cov=app
   - sudo coverage report -m
 
 after_success:
