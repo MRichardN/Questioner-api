@@ -1,5 +1,6 @@
 # Questioner-api
 [![Build Status](https://travis-ci.com/MRichardN/Questioner-api.svg?branch=develop)](https://travis-ci.com/MRichardN/Questioner-api)
+[![Coverage Status](https://coveralls.io/repos/github/MRichardN/Questioner-api/badge.svg?branch=develop)](https://coveralls.io/github/MRichardN/Questioner-api?branch=develop)
 
 A questioner is a platform for crowd-sourcing questions for a meetup. It helps the meetup organizer prioritize  questions to be answered. Other users can vote on asked questions and they bubble to the top  or bottom of the log.
 
