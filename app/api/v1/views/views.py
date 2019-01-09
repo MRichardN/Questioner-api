@@ -111,3 +111,22 @@ def get_a_specific_meetup(meetup_id):
         mtup = [mtup for mtup in mitup_list if mtup["id"] == meetup_id]
         return jsonify({ 'status': 200, 'data': mtup}), 200
     abort(404) 
+
+@version1.route('/post_question/', methods=["POST"])
+def post_question():
+    """
+    Post a question.
+    """
+    if not request.json or not 'title' in request.json:
+        abort(400)
+    post_quiz = {
+    'id': meetup_list[-1]['id'] + 1,
+    'title': request.json['title'],
+    'body': request.json['body'],
+    'createdOn': datetime.datetime.now(),
+    "createdBy" :request.json['createdBy'],
+    'meetup' : request.json['meetup'],
+    "votes": request.json['votes']
+    }
+    question.add_question(post_quiz)
+    return jsonify({ 'status': 201, 'data': post_quiz, }), 201      
