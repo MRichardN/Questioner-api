@@ -130,3 +130,20 @@ def post_question():
     }
     question.add_question(post_quiz)
     return jsonify({ 'status': 201, 'data': post_quiz, }), 201      
+
+@version1.route('/meetups/<int:meetup_id>/rsvp/', methods=["POST"])
+def post_rsvp(meetup_id):
+    """
+    Post a rsvp.
+    """
+    if not request.json or not 'meetup' in request.json:
+        abort(400)
+    post_rsvps = {
+    'id': meetup_list[-1]['id'] + 1,
+    'meetup': request.json['meetup'],
+    'user': request.json['user'],
+    "response" :request.json['response']
+    }
+
+    rsvp.add_rsvp(post_rsvps)
+    return jsonify({ 'status': 201, 'data': post_rsvps, }), 201 
