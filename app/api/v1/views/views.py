@@ -100,3 +100,14 @@ def upvote_question(question_id):
         return jsonify({ 'status':201, 'data': updated_question}), 201
     abort(404)  
    
+
+@version1.route('/meetups/<int:meetup_id>/', methods=['GET','POST','PUT','DELETE'])
+def get_a_specific_meetup(meetup_id):
+    """
+    Get a specific question.
+    """
+    if request.method == 'GET':
+        mitup_list = meetup.show_meetups()
+        mtup = [mtup for mtup in mitup_list if mtup["id"] == meetup_id]
+        return jsonify({ 'status': 200, 'data': mtup}), 200
+    abort(404) 
