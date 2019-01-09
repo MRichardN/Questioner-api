@@ -57,7 +57,7 @@ def post_meetups():
 @version1.route('/question/<int:question_id>/downvote/', methods=["PATCH"])
 def downvote_question(question_id):
     """
-    Update a question.
+    downvote a question.
     """
     if not request.json:
           abort(400)
@@ -76,11 +76,11 @@ def downvote_question(question_id):
         updated_question = question.update_question(question_id, title, body, createdOn, createdBy, meetup, votes)
         return jsonify({ 'status':201, 'data': updated_question}), 201
     abort(404)
-  
+
 @version1.route('/question/<int:question_id>/upvote/', methods=["PATCH"])
 def upvote_question(question_id):
     """
-    Update a question.
+    upvote a question.
     """
     if not request.json:
           abort(400)
@@ -98,4 +98,5 @@ def upvote_question(question_id):
         votes = request.json.get('votes', this_question[0]['votes'] ) +1
         updated_question = question.update_question(question_id, title, body, createdOn, createdBy, meetup, votes)
         return jsonify({ 'status':201, 'data': updated_question}), 201
-    abort(404)    
+    abort(404)  
+   
