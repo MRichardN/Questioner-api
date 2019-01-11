@@ -19,6 +19,19 @@ class TestDevelopmentConfig(unittest.TestCase):
 class TestTestingConfig(unittest.TestCase):
     """ Test testing environment config."""
 
+    def setUp(self):
+        # Initialize testing environment in app
+        self.app = create_app('testing')
+
+    def test_testing_environment(self):
+        """ Test configuration in testing environment."""
+        self.assertEqual(self.app.config['DEBUG'], True) 
+        self.assertEqual(self.app.config['TESTING'], True) 
+
+    def tearDown(self):
+        #Restore app to initial state
+        self.app = None
+
     
 
 class TestStagingConfig(unittest.TestCase):
