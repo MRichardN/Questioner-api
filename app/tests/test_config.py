@@ -37,5 +37,17 @@ class TestTestingConfig(unittest.TestCase):
 class TestStagingConfig(unittest.TestCase):
     """ Test statging environment config."""
 
+    def setUp(self):
+        # Initialize staging environment in app
+        self.app = create_app('staging')
+
+    def test_staging_environment(self):
+        """ Test configuration in staging environment."""
+        self.assertEqual(self.app.config['DEBUG'], True)
+
+    def tearDown(self):
+        #Restore app to initial state
+        self.app = None
+
 class TestProductionConfig(unittest.TestCase):
     """ Test production environment config."""    
