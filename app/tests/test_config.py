@@ -1,3 +1,5 @@
+""" Testing config."""
+
 import unittest
 from app import create_app
 
@@ -50,4 +52,17 @@ class TestStagingConfig(unittest.TestCase):
         self.app = None
 
 class TestProductionConfig(unittest.TestCase):
-    """ Test production environment config."""    
+    """ Test production environment config.""" 
+
+    def setUp(self):
+        # Initialize production environment in app
+        self.app = create_app('production')
+
+    def test_production_environment(self):
+        """ Test configuration in production environment."""
+        self.assertEqual(self.app.config['DEBUG'], False)
+        self.assertEqual(self.app.config['TESTING'], False)
+
+    def tearDown(self):
+        #Restore app to initial state
+        self.app = None   
