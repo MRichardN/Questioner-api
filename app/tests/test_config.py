@@ -2,13 +2,13 @@ import unittest
 from app import create_app
 
 class TestDevelopmentConfig(unittest.TestCase):
-    pass
+    """ Test development environment config."""
 
 class TestTestingConfig(unittest.TestCase):
-    pass
+    """ Test testing environment config."""
 
 class TestStagingConfig(unittest.TestCase):
-    pass
+    """ Test statging environment config."""
 
 class TestProductionConfig(unittest.TestCase):
-    pass    
+    """ Test production environment config."""    
