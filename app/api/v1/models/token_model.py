@@ -4,9 +4,9 @@ class RevokedTokenModel(object):
     """ Model class for revoked tokens """
 
     def add(self, jti):
-        """ Function to save token identifier """
+        """ add token to blacklist """
         blacklisted_tokens.append(jti)
 
     def inBlacklist(self, jti):
-        """ Function to check if token identifier is blacklisted """
+        """ check if token is blacklisted"""
         return bool(jti in blacklisted_tokens)
