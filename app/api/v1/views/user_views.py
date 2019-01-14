@@ -6,6 +6,7 @@ from flask_jwt_extended import (create_access_token, create_refresh_token, jwt_r
 
 # local import
 from app.api.v1 import version1
+from ..models.token_model import RevokedTokenModel
 from ..dbschemas.users_schema import UserSchema
 from ..models.users_model import User
 
@@ -89,3 +90,19 @@ def login():
         'access_token': access_token,
         'refresh_token': refresh_token
         }), 200
+
+@version1.route('/logout/', methods=['DELETE'])
+@jwt_required
+def logout():
+    """ Logout user """
+    jti = get_raw_jwt()['jti']
+    RevokedTokenModel().add(jti)
+    return jsonify({'status': 200, 'message': 'Logged out successfully'}), 200 
+
+@version1.route('/refresh_token/', methods=['POST'])
+@jwt_refresh_token_required
+def refresh_token():
+    """ Refresh user token."""
+    current_user = get_jwt_identity()
+    access_token = create_access_token(identity=current_user)
+    return jsonify({'status': 200, 'message': 'Token refreshed successfully', 'access_token': access_token})              
