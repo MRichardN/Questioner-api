@@ -54,3 +54,38 @@ def register_user():
         'access_token' : access_token, 
         'refresh_token' : refresh_token
         }), 201
+
+@version1.route('/login/', methods=['POST'])
+def login():
+    """ Login a registered user"""
+    data = request.get_json()
+
+    # Check for empty entries
+    if not data:
+        abort(make_response(jsonify({'status': 400, 'message': 'No data provided'}), 400))
+
+    # Check if credentials have been passed
+
+    try:
+        username = data['username']
+        password = data['password']
+    except:
+        abort(make_response(jsonify({'status': 400, 'message': 'Invalid credentials'}), 400))
+        # Check if username exists
+    if not usr.exists('username', username):
+        abort(make_response(jsonify({'status': 404, 'message' : 'User not found'}), 404))
+
+    user = usr.getOne('username', username)
+
+    # Check if password match
+    if not usr.checkpasswordhash(user['password'], password):
+        abort(make_response(jsonify({'status': 404, 'message' : 'Invalid password'}), 404))
+         # Generate user tokens 
+    access_token = create_access_token(identity=user['id'], fresh=True)
+    refresh_token = create_refresh_token(identity=True)
+    return jsonify({
+        'status': 200, 
+        'message': 'User logged in successfully',
+        'access_token': access_token,
+        'refresh_token': refresh_token
+        }), 200
