@@ -71,3 +71,12 @@ def login():
         password = data['password']
     except:
         abort(make_response(jsonify({'status': 400, 'message': 'Invalid credentials'}), 400))
+        # Check if username exists
+    if not usr.exists('username', username):
+        abort(make_response(jsonify({'status': 404, 'message' : 'User not found'}), 404))
+
+    user = usr.getOne('username', username)
+
+    # Check if password match
+    if not usr.checkpasswordhash(user['password'], password):
+        abort(make_response(jsonify({'status': 404, 'message' : 'Invalid password'}), 404))
