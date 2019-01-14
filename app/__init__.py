@@ -16,11 +16,8 @@ from app.api.v1.views.question_views   import version1 as questionsBlueprint
 
 
 def create_app(config_name):
-    """
-    Create app.
-    """
+    """ Create app."""
     app = Flask(__name__, instance_relative_config=True)
-    app.register_blueprint(version1)
     app.config.from_object(app_config[config_name])
     app.config.from_pyfile('config.py')
 
