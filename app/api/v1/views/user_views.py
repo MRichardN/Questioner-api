@@ -80,3 +80,12 @@ def login():
     # Check if password match
     if not usr.checkpasswordhash(user['password'], password):
         abort(make_response(jsonify({'status': 404, 'message' : 'Invalid password'}), 404))
+         # Generate user tokens 
+    access_token = create_access_token(identity=user['id'], fresh=True)
+    refresh_token = create_refresh_token(identity=True)
+    return jsonify({
+        'status': 200, 
+        'message': 'User logged in successfully',
+        'access_token': access_token,
+        'refresh_token': refresh_token
+        }), 200
