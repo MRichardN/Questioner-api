@@ -54,3 +54,20 @@ def register_user():
         'access_token' : access_token, 
         'refresh_token' : refresh_token
         }), 201
+
+@version1.route('/login/', methods=['POST'])
+def login():
+    """ Login a registered user"""
+    data = request.get_json()
+
+    # Check for empty entries
+    if not data:
+        abort(make_response(jsonify({'status': 400, 'message': 'No data provided'}), 400))
+
+    # Check if credentials have been passed
+
+    try:
+        username = data['username']
+        password = data['password']
+    except:
+        abort(make_response(jsonify({'status': 400, 'message': 'Invalid credentials'}), 400))
