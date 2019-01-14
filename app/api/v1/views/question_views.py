@@ -45,7 +45,7 @@ def downvote_question(question_id):
 
     # check if question exists
     if not QUESTION.exists('id', question_id):
-        abort(make_response(jsonify({'status': 404, 'error': 'Question not found'}, 404)))
+        abort(make_response(jsonify({'status': 404, 'error': 'Question not found'}), 404))
 
     # Downvote the question
     question = QUESTION.downvote(question_id)
