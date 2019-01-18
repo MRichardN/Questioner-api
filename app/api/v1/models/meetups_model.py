@@ -1,30 +1,27 @@
-class Meetup:
-    """
-    This class represents the meetup model.
-    """
-    def __init__(self, meetup_list):
-        """
-        Initialize meetups list.
-        """
-        self.meetup_list = meetup_list
+from datetime import datetime
+from ..utils.utils import idGenerator
+from .base_model import Model
 
-    def show_meetups(self):
-        """
-        Show the meetups.
-        """
-        return self.meetup_list
+meetups = []
 
-    def add_meetup(self, meetup):
-        """
-        Append meetups to the meetup_list.
-        """
-        self.meetup_list.append(meetup)  
+class Meetup(Model):
+    """ This class represents the meetup model."""
 
-    def delete_meetup(self, index):
-        """
-        Delete meetup.
-        """
-        del_meetup = [del_meetup for del_meetup in self.meetup_list if del_meetup["id"] == index]
-        if del_meetup:
-            self.meetup_list.remove(del_meetup[0])
-            return True 
+    def __init__(self):
+        super().__init__(meetups)
+
+    def save(self, data):
+        """ Save a meetup."""
+        data['id'] = idGenerator(self.collection)
+        data['createdOn'] = datetime.now()
+        data['happeningOn'] = datetime.now()
+        return super().save(data)
+
+   
+
+
+
+   
+
+
+

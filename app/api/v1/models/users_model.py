@@ -1,3 +1,37 @@
+from datetime import datetime
+from werkzeug.security import generate_password_hash, check_password_hash
+
+
+#local import
+from .base_model import Model
+from ..utils.utils import idGenerator
+
+users = []
+
+class User(Model):
+    """" This class represents users model."""
+    def __init__(self, ):
+        super().__init__(users)
+
+    def save(self, data):
+        """ Save a new user """
+        data['id'] = idGenerator(self.collection)
+        data['password'] = generate_password_hash(data['password'])
+        data['isAdmin'] = False
+        return super().save(data)
+
+    def checkpasswordhash(self, hash, password):
+        """ Check password match."""
+        return check_password_hash(hash, password)    
+
+
+
+
+'''
+if len(collection) == 0:
+        return 1
+    else:
+        return collection[-1]['id']+1
 
 class User:
     """
@@ -47,3 +81,4 @@ class Admin(User):
 
     def can_delete(self):
         return True    
+'''
